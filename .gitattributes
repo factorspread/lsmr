@@ -1,3 +1,4 @@
 model_researches/lsmr_models_researches.ipynb filter=lfs diff=lfs merge=lfs -text
 backtest/lsmr_backtest_run.ipynb filter=lfs diff=lfs merge=lfs -text
 *.png filter=lfs diff=lfs merge=lfs -text
+*.npz filter=lfs diff=lfs merge=lfs -text
