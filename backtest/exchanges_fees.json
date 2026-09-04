@@ -1,0 +1,22 @@
+{
+  "EXA": {
+    "spot":    { "maker": 0.10, "taker": 0.10 },
+    "futures": { "maker": 0.02, "taker": 0.060 }
+  },
+  "EXB": {
+    "spot":    { "maker": 0.10, "taker": 0.10 },
+    "futures": { "maker": 0.02, "taker": 0.055 }
+  },
+  "EXC": {
+    "spot":    { "maker": 0.10, "taker": 0.10 },
+    "futures": { "maker": 0.02, "taker": 0.060 }
+  },
+  "EXD": {
+    "spot":    { "maker": 0.00, "taker": 0.05 },
+    "futures": { "maker": 0.00, "taker": 0.020 }
+  },
+  "EXE": {
+    "spot":    { "maker": 0.10, "taker": 0.10 },
+    "futures": { "maker": 0.02, "taker": 0.050 }
+  }
+}

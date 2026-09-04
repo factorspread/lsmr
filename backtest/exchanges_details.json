@@ -1,0 +1,37 @@
+{
+  "EXA": {
+    "STETHUSDT":  { "tick_size": 0.01,    "lot": 0.0001  },
+    "ETHUSDT":    { "tick_size": 0.01,    "lot": 0.0001  },
+    "ETHUSDT.P":  { "tick_size": 0.01,    "lot": 0.01    },
+    "RPLUSDT.P":  { "tick_size": 0.001,   "lot": 0.1     },
+    "RPLUSDT":  { "tick_size": 0.001,   "lot": 0.01     }
+  },
+  "EXB": {
+    "STETHUSDT":  { "tick_size": 0.00001, "lot": 0.00001 },
+    "ETHUSDT":    { "tick_size": 0.00001, "lot": 0.00001 },
+    "ETHUSDT.P":  { "tick_size": 0.01,    "lot": 0.01    },
+    "METHUSDT":   { "tick_size": 0.00001, "lot": 0.00001 },
+    "RPLUSDT":    { "tick_size": 0.01,    "lot": 0.01    },
+    "RPLUSDT.P":  { "tick_size": 0.0001,  "lot": 0.01    }
+  },
+  "EXC": {
+    "STETHUSDT":  { "tick_size": 0.001,   "lot": 0.01    },
+    "ETHUSDT":    { "tick_size": 0.0001,  "lot": 0.0008  },
+    "ETHUSDT.P":  { "tick_size": 0.01,    "lot": 0.001   },
+    "RPLUSDT":    { "tick_size": 0.01,    "lot": 0.35    },
+    "RPLUSDT.P":  { "tick_size": 0.001,   "lot": 0.01    }
+  },
+  "EXD": {
+    "STETHUSDT":  { "tick_size": 0.01,    "lot": 0.00001 },
+    "ETHUSDT":    { "tick_size": 0.01,    "lot": 0.0001  },
+    "ETHUSDT.P":  { "tick_size": 0.01,    "lot": 0.01    },
+    "RPLUSDT":    { "tick_size": 0.001,   "lot": 0.01    },
+    "RPLUSDT.P":  { "tick_size": 0.001,   "lot": 0.1     }
+  },
+  "EXE": {
+    "ETHUSDT":    { "tick_size": 0.01,    "lot": 0.0001  },
+    "ETHUSDT.P":  { "tick_size": 0.01,    "lot": 0.001   },
+    "RPLUSDT":    { "tick_size": 0.01,    "lot": 0.01    },
+    "RPLUSDT.P":  { "tick_size": 0.001,   "lot": 0.1     }
+  }
+}
