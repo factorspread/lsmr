@@ -1,5 +1,5 @@
 [project]
-name = "LSMR Research"
+name = "lsmr_research"
 version = "0.1.0"
 description = "Research environment"
 requires-python = ">=3.13"
