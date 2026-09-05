@@ -34,7 +34,7 @@ def plot_obs_charts(dsets:pd.DataFrame, save_path:str):
         MAIN_PCT = 85
 
 
-        size = obs_max = dset['model']._dep_var.shape[0]
+        size = dset['model']._dep_var.shape[0]
         obs_min = 0
         obs_max = size
         dist_params = {}
