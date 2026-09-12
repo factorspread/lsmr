@@ -173,10 +173,9 @@ class CoreLstmr(LiquidStackingMeanReversion):
 
                     max_px_deviation = max_px_delta_loss * mid_m1 / 1e4 #Maximum acceptable deviation in bps
                     #Maximum leverage is the leverage at which MAX_EQ_LOSS of EQUITY is lost given the maximum acceptable deviation in bps
-                    #As leverage = (x*EQUITY) / (p_t - p_t-1), the below just replaces the variables
-                    leverage = (-self.MAX_EQ_LOSS * self.EQUITY) / max_px_deviation
+                    #As equity_loss = (loss_ratio * EQUITY), the maximum size is equity_loss / (p_t - p_t-1)
+                    size = (-self.MAX_EQ_LOSS * self.EQUITY) / max_px_deviation
 
-                    size = leverage * self.EQUITY / self.depth_m1.best_ask #Maximum size is the leveraged equity expressed in base currency
                     qty = min(self.depth_m1.best_ask_qty, abs(size))
 
                     #Fire orders
@@ -273,10 +272,9 @@ class CoreLstmr(LiquidStackingMeanReversion):
                     max_px_deviation = max_px_delta_loss * mid_m1 / 1e4 #Maximum acceptable deviation in bps
 
                     #Maximum leverage is the leverage at which MAX_EQ_LOSS of EQUITY is lost given the maximum acceptable deviation in bps
-                    #As leverage = (x*EQUITY) / (p_t - p_t-1), the below just replaces the variables
-                    leverage = (-self.MAX_EQ_LOSS * self.EQUITY) / max_px_deviation
+                    #As equity_loss = (loss_ratio * EQUITY), the maximum size is equity_loss / (p_t - p_t-1)
+                    size = (-self.MAX_EQ_LOSS * self.EQUITY) / max_px_deviation
 
-                    size = leverage * self.EQUITY / self.depth_m1.best_bid #Maximum size is the leveraged equity expressed in base currency
                     qty = min(self.depth_m1.best_bid_qty, abs(size))
                     
                     #Fire order
