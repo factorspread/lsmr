@@ -117,6 +117,15 @@ class CoreLstmr(LiquidStackingMeanReversion):
             - last_spread_m1 : Observed spread on M1 at t-1
             - last_spread_m2 : Observed spread on M2 at t-1
         """
+
+        #Check current leverage
+        #Skip if exceeded maximum allowed leverage limit
+        sv = self.hbt.state_values(0)
+        pnl = ((self.depth_m1.best_ask + self.depth_m1.best_bid) / 2) * sv.position + sv.balance
+        curr_leverage = (self.EQUITY + pnl) / self.EQUITY
+        if curr_leverage > self.MAX_LEVERAGE:
+            return 0
+
         
         #Mid-quote at signal time
         mid_m1, mid_m2 = mid_quotes

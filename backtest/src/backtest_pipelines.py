@@ -41,6 +41,7 @@ class LiquidStackingMeanReversion():
             self.EQUITY = 1_000
             self.MAX_EQ_LOSS = 0.5
             self.MAX_LOSS_PROB = 1/1e4
+            self.MAX_LEVERAGE = 75.0
             self.STEP_TIME_INTEVAL = 300
             self.MIN_PROBABILITY_ENTRY_SIGNAL = 0.6
             self.MAX_PROBABILITY_STOP_LOSS_SIGNAL = 0.1
@@ -625,6 +626,13 @@ class LiquidStackingMeanReversion():
         The path of the directory to save all the outputs.
         """
         self.OUTPUT_BASEPATH = value
+
+    def set_max_leverage(self, value:float):
+        """
+        The maximum allowed leverage
+        Value should be expressed as decimal
+        """
+        self.MAX_LEVERAGE = value
 
     def show_params(self):
         "Pretty print all the parameters"
