@@ -51,12 +51,10 @@ paper/              the research paper and its figures
 
 | File | What it is |
 | --- | --- |
-| `lsmr_backtest_run.ipynb` | the entry point: instantiate the pipeline, load the fitted models, override parameters, run one process per combination, display the PnL charts |
-| `src/backtest_pipelines.py` | `LiquidStackingMeanReversion` — multiprocessed backtesting pipeline |
+| `lsmr_backtest_run.ipynb` | Runs the backtesting pipeline |
+| `src/backtest_pipelines.py` | Multiprocessed backtesting pipeline |
 | `src/backtest_cores.py` | Core of the backtesting strategy|
 | `src/backtest_stats.py` | Produces the backtesting statistics |
-| `src/hbtasset.py` | `asset_const` — builds an `hftbacktest` asset from `exchanges_details.json` (tick size, lot size, queue/exchange/fee/latency models) |
-| `src/utils.py` | L2 conversion to the engine's event format, snapshot creation, fee lookup, nearest-timestamp alignment across books |
 | `results/hftrecords/*.npz` | raw engine records per leg |
 | `results/trades_slippage/*_slippage.csv` | per-entry signal vs. executed prices and spread impact, both legs |
 | `results/graphs/*.png` | cumulative-PnL charts |
