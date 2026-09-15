@@ -65,3 +65,5 @@ paper/              the research paper and its figures
 | File | What it is |
 | --- | --- |
 | `LSMR.pdf` | the reasearch paper |
+
+*Note: The venues' anonymized datasets are available on request*
