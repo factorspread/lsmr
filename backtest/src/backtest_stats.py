@@ -21,6 +21,8 @@ class BackTestStats():
         self.sortino = None
         self.graph = None
         self.graph_out_path = None
+        self.seconds_elapse_req = None
+        self.yearly_elapses = None
 
 
 class StatsLstmr():
@@ -65,6 +67,14 @@ class StatsLstmr():
             LinearAssetRecord(res_npz["0"]).stats(book_size=self.EQUITY),\
             LinearAssetRecord(res_npz["1"]).stats(book_size=self.EQUITY)
 
+        #Interval frequency between each backtest iteration
+        seconds_elapse_req = current.m1_LinearAssetRecord.entire.to_pandas()['timestamp'].diff()\
+            .dt.seconds.dropna().unique()
+        if len(seconds_elapse_req) > 1:
+            raise AssertionError("The backteest inteval frequency is not constent")
+        current.seconds_elapse_req = seconds_elapse_req[0]
+        current.yearly_elapses = 60 / current.seconds_elapse_req * 60 * 24 * 365 #Count of iterations in a year. Cryptos trade 24/7
+
     def _multi_imports(self):
         threads = []
 
@@ -97,7 +107,17 @@ class StatsLstmr():
         self.curr.graph = self.generate_chart(self.curr, k)
         self.curr.graph_out_path = self.save_chart(self.curr, k, self.base_path)
 
-        q.put({k : self.curr})        
+        q.put({k : self.curr})
+    
+    def _calc_returns(self, curr:BackTestStats):
+         return curr.pnl['pnl_pct'].diff()
+
+    def _return_gate(self, stat, curr:BackTestStats, min_values:float=0.5):
+        ratio_nn = curr.pnl['pnl_pct'].isna().sum() / curr.pnl['pnl_pct'].shape[0]
+        if ratio_nn > min_values:
+            return np.nan
+        return stat
+
 
     def produce_stats(self, base_directory:str):
         """
@@ -180,11 +200,13 @@ class StatsLstmr():
         Args:
             - curr: Current BackTestStats object
         """
-        pnl_pct = curr.pnl['pnl_pct']
+        returns = self._calc_returns(curr)
 
-        sharpe = pnl_pct.iloc[-1]/np.std(pnl_pct)
+        std = np.std(returns)
 
-        return sharpe
+        sharpe = (returns.mean() / std) * np.sqrt(curr.yearly_elapses) #Annualized Sharpe
+
+        return self._return_gate(sharpe, curr)
 
     def calc_sortino(self, curr:BackTestStats, mar:float=0.0):
         """
@@ -195,11 +217,14 @@ class StatsLstmr():
             - curr: Current BackTestStats object
             - mar: The minimum acceptable percentage returns in decimal (default 0)     
         """
-        pnl_pct = curr.pnl['pnl_pct']
 
-        sortino = pnl_pct.iloc[-1]/np.std(pnl_pct[pnl_pct < mar])
+        returns = self._calc_returns(curr)
 
-        return sortino
+        std = np.sqrt(np.mean(np.minimum(np.minimum(returns, np.ones(returns.shape[0]) * mar), 0)) **2)
+
+        sortino = (returns.mean() / std) * np.sqrt(curr.yearly_elapses) #Annualized Sortino
+
+        return self._return_gate(sortino, curr)
 
     def generate_chart(self, curr:BackTestStats, k:str):
         """
